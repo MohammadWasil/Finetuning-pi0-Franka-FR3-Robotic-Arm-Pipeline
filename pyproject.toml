@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "robotic-arm-VLA-pipeline"
+version = "0.1.0"
+description = "Robotic ARM VLA Pipeline, LeRobot dataset conversion, Pi-0 fine-tuning, and closed-loop VLA inference pipeline for robotic arms"
+authors = ["Mohammad Wasil Saleem wasilmohd1@gmail.com"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.11"
+numpy = ">=1.22.4,<2.0.0"
+pillow = ">=11.0.0"
+tqdm = "^4.66.0"
+tyro = ">=0.9.5"
+
+[tool.poetry.group.convert.dependencies]
+pandas = "^2.2.0"
+huggingface-hub = "^0.30.0"
+lerobot = { git = "https://github.com/huggingface/lerobot", rev = "0cf864870cf29f4738d3ade893e6fd13fbd7cdb5" }
+
+[tool.poetry.group.bridge.dependencies]
+websockets = "^12.0"
+msgpack = "^1.0.8"
+msgpack-numpy = "^0.4.8"
+
+[tool.poetry.group.train]
+optional = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
