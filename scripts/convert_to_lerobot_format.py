@@ -11,7 +11,7 @@ from lerobot.common.datasets.lerobot_dataset import HF_LEROBOT_HOME, LeRobotData
 
 def main(
     data_dir: str = "D:/ML/RobotLearning/dataset_fr3_pick_place",
-    repo_id: str = "MY_HF_USERNAME/fr3-unity-ball-pick-place",
+    repo_id: str = "wasil11/Franka-FR3-Unity3d-Simulation-Ball-Pick-And-Place",
     push_to_hub: bool = True,
     private: bool = False,
 ):
@@ -20,9 +20,9 @@ def main(
         meta = json.load(f)
 
     fps = int(meta.get("fps", 15))
-    img_h, img_w = meta.get("image_size",)
+    img_h, img_w = meta.get("image_size", [224, 224])
     default_prompt = meta.get(
-        "prompt", "pick up the red ball and place it in the bowl"
+        "prompt", "pick up the red ball and place it on the green platform"
     )
 
     output_path = HF_LEROBOT_HOME / repo_id
