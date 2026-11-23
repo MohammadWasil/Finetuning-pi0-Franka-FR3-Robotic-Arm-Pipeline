@@ -6,14 +6,11 @@ A simulator-agnostic end-to-end pipeline for converting robotic manipulation tra
 
 ## Setup (Poetry)
 
-1. Install dependencies locally (lightweight conversion & inference bridge groups):
-   ```bash
-   poetry install
-   ```
-2. Log in to Hugging Face with a Write token / upload/Download data:
-   ```bash
-   poetry run huggingface-cli login
-   ```
+# 1. Clone and install everything automatically
+```bash
+cd robotic-arm-VLA-pipeline
+bash installation.sh
+```
 
 ## Usage
 
@@ -25,6 +22,17 @@ poetry run python scripts/1_convert_to_lerobot.py \
   --data_dir "DATA_PATH/dataset_fr3_pick_place" \
   --repo_id "wasil11/Franka-FR3-Unity3d-Simulation-Ball-Pick-And-Place"
   --robot_type "franka_fr3"
+```
+
+### Compute normalization statistics
+```bash
+cd third_party/openpi
+../../.venv/bin/python scripts/compute_norm_stats.py --config-name pi0_fr3_unity_low_mem_finetune
+```
+
+### Fine-tune π₀ (add WANDB_MODE=disabled if not logging into W&B)
+```bash
+XLA_PYTHON_CLIENT_MEM_FRACTION=0.9 ../../.venv/bin/python scripts/train.py pi0_fr3_unity_low_mem_finetune --exp-name=fr3_pick_place --overwrite
 ```
 
 ## Related Resources
