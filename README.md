@@ -4,9 +4,9 @@ Download Dataset: https://huggingface.co/datasets/wasil11/Franka-FR3-Unity3d-Sim
 
 A simulator-agnostic end-to-end pipeline for converting robotic manipulation trajectories into **LeRobot** format, publishing datasets to **Hugging Face**, fine-tuning **π₀ (`openpi`)** Vision-Language-Action (VLA) models, and executing closed-loop inference.
 
-## Setup (Poetry)
+## Setup
 
-# 1. Clone and install everything automatically
+### Clone and install everything automatically
 ```bash
 cd robotic-arm-VLA-pipeline
 bash installation.sh
