@@ -17,7 +17,7 @@ export PATH="${VENV_DIR}/bin:${PATH}"
 
 # 2. Install Poetry and project dependencies directly into .venv
 pip install -q poetry
-poetry config virtualenvs.create false
+poetry config virtualenvs.create true
 
 cd "${REPO_DIR}"
 poetry lock
