@@ -26,7 +26,7 @@ poetry install
 # 3. Clone forked openpi into third_party/openpi and install into the same .venv
 rm -rf "${OPENPI_DIR}"
 mkdir -p "$(dirname "${OPENPI_DIR}")"
-git clone --recurse-submodules https://github.com "${OPENPI_DIR}"
+git clone --recurse-submodules https://github.com/MohammadWasil/openpi.git "${OPENPI_DIR}"
 
 cd "${OPENPI_DIR}"
 GIT_LFS_SKIP_SMUDGE=1 uv pip install --python "${VENV_DIR}/bin/python" \
