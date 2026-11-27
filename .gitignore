@@ -1,2 +1,6 @@
 .venv/
 third_party/
+checkpoints/
+wandb/
+
+train.log
