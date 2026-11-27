@@ -1,6 +1,7 @@
 # Robotic Arm VLA Pipeline
 
 Download Dataset: https://huggingface.co/datasets/wasil11/Franka-FR3-Unity3d-Simulation-Ball-Pick-And-Place
+Download Fine-tuned pi-0 Model (10K Checkoint) : https://huggingface.co/wasil11/pi0-franka-fr3-pick-and-place-lora
 
 A simulator-agnostic end-to-end pipeline for converting robotic manipulation trajectories into **LeRobot** format, publishing datasets to **Hugging Face**, fine-tuning **π₀ (`openpi`)** Vision-Language-Action (VLA) models, and executing closed-loop inference.
 
