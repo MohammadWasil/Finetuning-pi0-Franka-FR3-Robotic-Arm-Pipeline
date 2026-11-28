@@ -6,7 +6,7 @@ from huggingface_hub import snapshot_download
 
 
 def main(
-    repo_id: str = "wasil11/pi0-fr3-unity-ball-pick-place-lora",
+    repo_id: str = "wasil11/pi0-franka-fr3-pick-and-place-lora",
     step: int = 9999,
     config_name: str = "pi0_fr3_unity_low_mem_finetune",
     local_checkpoint_root: Path = Path("checkpoints/pi0_fr3_unity_low_mem_finetune/fr3_v1"),
