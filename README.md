@@ -12,21 +12,95 @@ Download Dataset: https://huggingface.co/datasets/wasil11/Franka-FR3-Unity3d-Sim
 
 The model was trained for 10K iterations.
 
-| Model | Mode | GPU/Memory/Disk Requirement | Training Duration | Training Cost | Hugging Face Model Download link | Loss Curve |
-| --- | :---: | --- | --- | --- | --- | --- |
-| π₀ | Fine-Tuning (LoRA) | **RTX 4090, 22 GiB VRAM, 50 GiB Disk Space**  | 3.5 Hours | € 2.41 | https://huggingface.co/wasil11/pi0-franka-fr3-pick-and-place-lora | ![pi0 Lora Finetuing](media/pi0-lora-finetuining.png)
-| π₀ | Fine-Tuning (Full) | - | In Progress | - | - | - |
-| π₀.₅ | Fine-Tuning (LoRA) | - | - | - | - | - |
-| π₀.₅ | Fine-Tuning (Full) | - | - | - | - | - |
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th align="center">Mode</th>
+      <th>Hardware</th>
+      <th>Duration</th>
+      <th>Cost</th>
+      <th>Hugging Face</th>
+      <th>Loss Curve</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>π₀</td>
+      <td align="center">Fine-Tuning (LoRA)</td>
+      <td><b>RTX 4090</b><br>22 GiB VRAM<br>50 GiB Disk</td>
+      <td>3.5 Hours</td>
+      <td>€ 2.41</td>
+      <td><a href="https://huggingface.co/wasil11/pi0-franka-fr3-pick-and-place-lora">HuggingFace</a></td>
+      <td><img src="media/pi0-lora-finetuining.png" width="550" alt="pi0 LoRA Fine-Tuning"></td>
+    </tr>
+    <tr>
+      <td>π₀</td>
+      <td align="center">Fine-Tuning (Full)</td>
+      <td>-</td>
+      <td>In Progress</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>π₀.₅</td>
+      <td align="center">Fine-Tuning (LoRA)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>π₀.₅</td>
+      <td align="center">Fine-Tuning (Full)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Inference Results
-| Model | Mode | GPU/Memory/Disk Requirement | Inference Attempts |
-| --- | :---: | --- | --- |
-| π₀ | Inference (LoRA) | **RTX 4090, 11 GiB VRAM, 50 GiB Disk Space** |![pi0-LoRA-Finetuning-pick-and-place-inference](media/pi0_lora_finetuning_inference_01.gif) |
-| π₀ | Inference (Full) | - | - |
-| π₀.₅ | Inference (LoRA) | - | - |
-| π₀.₅ | Inference (Full) | - | - |
-
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th align="center">Mode</th>
+      <th>Hardware</th>
+      <th>Inference Attempts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>π₀</td>
+      <td align="center">Inference (LoRA)</td>
+      <td><b>RTX 4090</b><br>11 GiB VRAM<br>50 GiB Disk</td>
+      <td><img src="media/pi0_lora_finetuning_inference_01.gif" width="600" alt="pi0 LoRA Inference"></td>
+    </tr>
+    <tr>
+      <td>π₀</td>
+      <td align="center">Inference (Full)</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>π₀.₅</td>
+      <td align="center">Inference (LoRA)</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>π₀.₅</td>
+      <td align="center">Inference (Full)</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Setup and Usage 
 
