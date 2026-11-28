@@ -1,11 +1,12 @@
 from collections import deque
+import io
 import socket
 import struct
 import numpy as np
 from PIL import Image
-import io
 import tyro
-from openpi_client import websocket_client_policy
+import websockets.sync.client
+from openpi_client import msgpack_numpy, websocket_client_policy
 
 
 def recv_exact(conn: socket.socket, num_bytes: int) -> bytes:
@@ -16,6 +17,18 @@ def recv_exact(conn: socket.socket, num_bytes: int) -> bytes:
             raise ConnectionError("Unity disconnected.")
         buf.extend(chunk)
     return bytes(buf)
+
+
+def connect_policy_no_timeout(host: str, port: int) -> websocket_client_policy.WebsocketClientPolicy:
+    policy = websocket_client_policy.WebsocketClientPolicy.__new__(websocket_client_policy.WebsocketClientPolicy)
+    policy._uri = f"ws://{host}:{port}"
+    policy._packer = msgpack_numpy.Packer()
+    # Disable ping_timeout so first-time JAX JIT compilation (~35s) never drops the socket
+    policy._ws = websockets.sync.client.connect(
+        policy._uri, compression=None, max_size=None, open_timeout=60, ping_timeout=None
+    )
+    policy._server_metadata = msgpack_numpy.unpackb(policy._ws.recv())
+    return policy
 
 
 def main(
@@ -59,14 +72,24 @@ def main(
     """
 
     print(f"Connecting to openpi policy server at ws://{policy_host}:{policy_port} ...")
-    policy = websocket_client_policy.WebsocketClientPolicy(host=policy_host, port=policy_port)
+    policy = connect_policy_no_timeout(policy_host, policy_port)
     print(f"Connected to policy server! Metadata: {policy.get_server_metadata()}")
+
+    print("Warming up JAX JIT on server (takes ~30s once, then ~80ms per step)...")
+    dummy_obs = {
+        "observation/image": np.zeros((224, 224, 3), dtype=np.uint8),
+        "observation/wrist_image": np.zeros((224, 224, 3), dtype=np.uint8),
+        "observation/state": np.zeros((8,), dtype=np.float32),
+        "prompt": prompt,
+    }
+    _ = policy.infer(dummy_obs)
+    print("Server warmed up and ready!")
 
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_sock.bind((unity_host, unity_port))
     server_sock.listen(1)
-    print(f"Waiting for Unity simulation on {unity_host}:{unity_port} ...")
+    print(f"Waiting for Unity simulation on {unity_host}:{unity_port} (press Ctrl+Break to exit)...")
 
     conn, addr = server_sock.accept()
     print(f"Unity connected from {addr}")
@@ -100,10 +123,12 @@ def main(
                 }
                 result = policy.infer(obs)
                 action_chunk = np.asarray(result["actions"], dtype=np.float32)  # shape: (50, 8)
+                print(f"Inference step -> Action: {np.round(action_chunk, 3)}")
                 for step_action in action_chunk[:replan_steps]:
                     action_queue.append(step_action)
 
             next_action = action_queue.popleft().astype("<f4")
+            assert next_action.nbytes == 32, f"Expected 32 bytes, got {next_action.nbytes}"
             conn.sendall(next_action.tobytes())  # 32 bytes (8 float32 values)
     finally:
         conn.close()
