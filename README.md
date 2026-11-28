@@ -32,7 +32,7 @@ The model was trained for 10K iterations.
       <td>3.5 Hours</td>
       <td>€ 2.41</td>
       <td><a href="https://huggingface.co/wasil11/pi0-franka-fr3-pick-and-place-lora">HuggingFace</a></td>
-      <td><img src="media/pi0-lora-finetuining.png" width="550" alt="pi0 LoRA Fine-Tuning"></td>
+      <td><img src="media/pi0-lora-finetuining.png" width="800" alt="pi0 LoRA Fine-Tuning"></td>
     </tr>
     <tr>
       <td>π₀</td>
