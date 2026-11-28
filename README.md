@@ -22,7 +22,7 @@ The model was trained for 10K iterations.
 ### Inference Results
 | Model | Mode | GPU/Memory/Disk Requirement | Inference Attempts |
 | --- | :---: | --- | --- |
-| π₀ | Inference (LoRA) | **RTX 4090, 11 GiB VRAM, 50 GB Disk Space** | <video controls src="media/pi0_lora_finetuning_inference_01.mp4" title="pi0-LoRA-Finetuning-pick-and-place-inference"></video> |
+| π₀ | Inference (LoRA) | **RTX 4090, 11 GiB VRAM, 50 GB Disk Space** |![pi0-LoRA-Finetuning-pick-and-place-inference](media/pi0_lora_finetuning_inference_01.gif) |
 | π₀ | Inference (Full) | - | - |
 | π₀.₅ | Inference (LoRA) | - | - |
 | π₀.₅ | Inference (Full) | - | - |
